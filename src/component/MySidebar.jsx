@@ -3,17 +3,17 @@ import React, { Component } from 'react';
 class MySidebar extends Component {
     render() {
         return (
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Retirement <span class="sr-only">(current)</span></a>
+            <nav className="col-md-2 d-none d-md-block bg-light sidebar">
+                <div className="sidebar-sticky">
+                    <ul className="nav flex-column">
+                        <li className="nav-item">
+                            <a className="nav-link active" href="#">Retirement <span className="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Near Future</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Near Future</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Emergency Fund</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Emergency Fund</a>
                         </li>
                     </ul>
                 </div>

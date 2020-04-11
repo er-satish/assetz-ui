@@ -10,8 +10,8 @@ class App extends Component {
     return (
       <div className="App">
         <MyHeader />
-        <div class="container-fluid">
-        <div class="row">
+        <div className="container-fluid">
+        <div className="row">
         <MySidebar />
         <MainContent />
         </div>
