@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as utils from './Utils'
 
 class InfoCard extends Component {
     render() {
@@ -11,7 +12,7 @@ class InfoCard extends Component {
             icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
         }
 
-        const formattedAmount = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(this.props.amount)
+        const formattedAmount = utils.formatMoney(this.props.amount)
         return (
             <div className="card bg-light">
                 <div className="card-body text-left">

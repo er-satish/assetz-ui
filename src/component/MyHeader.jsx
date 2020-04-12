@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as utils from './Utils'
 
 class MyHeader extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      totalNetworth : null,
-      totalNetworthChange : null
+      totalNetworth: null,
+      totalNetworthChange: null
     }
-}
+  }
 
   static getDerivedStateFromProps(props, state) {
     const { data } = props;
@@ -31,6 +32,9 @@ class MyHeader extends Component {
     } else if (totalNetworthChange > 0) {
       icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" className="ml-1" />
     }
+    const formattedTotalNetworth = utils.formatMoney(totalNetworth)
+    const formattedTotalNetworthChange = utils.formatMoney(totalNetworthChange)
+
     return (
       <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <div>
@@ -41,13 +45,13 @@ class MyHeader extends Component {
           <div className="col">
             <a className="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">
               My Networth: <FontAwesomeIcon icon="rupee-sign" color="white" size="1x" />
-              <span className="label label-default ml-1">{totalNetworth}</span>
+              <span className="label label-default ml-1">{formattedTotalNetworth}</span>
             </a>
           </div>
           <div className="col">
             <a className="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">
               Today's Change: <FontAwesomeIcon icon="rupee-sign" color="white" size="1x" />
-              <span className="label label-default ml-1">{totalNetworthChange}</span>
+              <span className="label label-default ml-1">{formattedTotalNetworthChange}</span>
               {icon}
             </a>
           </div>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as utils from './Utils'
 
 function lossGainFormatter(cell, row) {
   let icon;
-  const formattedAmount = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(cell)
+  const formattedAmount = utils.formatMoney(cell)
   if (cell < 0) {
     icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
   } else if (cell > 0) {
@@ -17,7 +18,7 @@ function lossGainFormatter(cell, row) {
 }
 
 function moneyFormatter(cell, row) {
-  const formattedAmount = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(cell)
+  const formattedAmount = utils.formatMoney(cell)
   return (
     <span>{formattedAmount} </span>
   );
