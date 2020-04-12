@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React, { Component } from 'react';
 import MyHeader from './component/MyHeader';
 import Footer from './component/Footer';
 import MySidebar from './component/MySidebar';
@@ -10,29 +10,36 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      portfolioName : "Retirement"
+      portfolioName: "Retirement"
     }
     this.portfolioChange = this.handlePortfolioChange.bind(this);
   }
 
   handlePortfolioChange(name) {
-    debugger;
     this.setState({
-        portfolioName: name
+      portfolioName: name
     });
-  } 
+  }
+
+  componentDidMount() {
+    fetch('http://www.mocky.io/v2/5e92ba183000008f0015669f')
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({ data: data })
+      })
+      .catch(console.log)
+  }
 
   render() {
-    debugger
-    const { portfolioName } = this.state;
+    const { portfolioName, data } = this.state;
     return (
       <div className="App">
-        <MyHeader />
+        <MyHeader data={data} />
         <div className="container-fluid">
-        <div className="row">
-        <MySidebar handlePortfolioChange={this.portfolioChange.bind(this)} />
-        <MainContent portfolioName={portfolioName} />
-        </div>
+          <div className="row">
+            <MySidebar data={data} handlePortfolioChange={this.portfolioChange.bind(this)} />
+            <MainContent portfolioName={portfolioName} data={data} />
+          </div>
         </div>
         <Footer />
 
