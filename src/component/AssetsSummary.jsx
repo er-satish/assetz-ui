@@ -16,9 +16,6 @@ function lossGainFormatter(cell, row) {
 }
 
 class AssetsSummary extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     // const assets = [
@@ -40,13 +37,10 @@ class AssetsSummary extends Component {
     //     gainLossPercentage:"-5.00"
     //   }
     // ];
-    debugger
     let details = [];
-    if(this.props.assets && this.props.assets.assets && this.props.assets.assets.details){
-      details = this.props.assets.assets.details;
+    if(this.props.assets && this.props.assets.details){
+      details = this.props.assets.details;
     }
-    console.log("assets in assets summary");
-    console.log(details)
     const columns = [
       {
         dataField: 'assetType',

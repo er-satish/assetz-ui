@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class InfoCard extends Component {
-    constructor(props) {
-        super(props);
-      }
   render() {
     const changePercentage = this.props.changePercentage;
     let icon;
