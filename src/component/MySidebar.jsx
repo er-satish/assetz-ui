@@ -5,6 +5,9 @@ class MySidebar extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            links : []
+        }
     }
 
     static getDerivedStateFromProps(props, state) {

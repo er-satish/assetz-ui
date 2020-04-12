@@ -10,7 +10,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      portfolioName: "Retirement"
+      portfolioName: "Retirement",
+      data: null
     }
     this.portfolioChange = this.handlePortfolioChange.bind(this);
   }
@@ -22,7 +23,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://www.mocky.io/v2/5e92ba183000008f0015669f')
+    fetch('http://192.168.0.105:8080/assets')
       .then(res => res.json())
       .then((data) => {
         this.setState({ data: data })

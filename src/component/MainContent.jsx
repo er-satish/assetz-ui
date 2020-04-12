@@ -39,18 +39,17 @@ class MainContent extends Component {
                             <button className="btn btn-sm btn-outline-secondary">Share</button>
                             <button className="btn btn-sm btn-outline-secondary">Export</button>
                         </div>
-                        <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <span data-feather="calendar"></span>
-                            This week
-                        </button>
+                        <select className="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <option selected value="today">Today</option>
+                            <option value="this-week">This Week</option>
+                            <option value="this-month">This Month</option>
+                            <option value="this-year">This Year</option>
+                        </select>
                     </div>
                 </div>
 
                 <div className="card-columns">
                     {cards}
-                    {/* <InfoCard name="My Networth" amount="15,000,00" changePercentage="10.0" change="10,000"/>
-                    <InfoCard name="Stocks" amount="15,000,00" changePercentage="-10.0" change="10,000"/>
-                    <InfoCard name="Mutual Funds" amount="15,000,00" changePercentage="8.0" change="10,000"/> */}
                 </div>
 
                 <AssetsSummary assets={assets} />

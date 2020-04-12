@@ -3,7 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class MyHeader extends Component {
 
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalNetworth : null,
+      totalNetworthChange : null
+    }
+}
 
   static getDerivedStateFromProps(props, state) {
     const { data } = props;
