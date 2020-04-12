@@ -4,41 +4,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function lossGainFormatter(cell, row) {
   let icon;
-  if(cell < 0){
-      icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red"/>
-  }else if(cell > 0){
-      icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green"/>
+  const formattedAmount = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(cell)
+  if (cell < 0) {
+    icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
+  } else if (cell > 0) {
+    icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
   }
   return (
-    <span>{ cell } {icon}</span>
-    
+    <span>{formattedAmount} {icon}</span>
+
+  );
+}
+
+function moneyFormatter(cell, row) {
+  const formattedAmount = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(cell)
+  return (
+    <span>{formattedAmount} </span>
   );
 }
 
 class AssetsSummary extends Component {
 
   render() {
-    // const assets = [
-    //   {
-    //     assetType: "Stock",
-    //     currentValuation: "100.00",
-    //     amountInvested: "100.00",
-    //     gainLoss:"100980.00",
-    //     gainLossPercentage:"10.00",
-    //     totalNotionalGainLoss:"2,343,34,345",
-    //     totalRealizedGainLoss:"2,343,34,345"
-
-    //   },
-    //   {
-    //     assetType: "Mutual Fund",
-    //     currentValuation: "100.00",
-    //     amountInvested: "100.00",
-    //     gainLoss:"-10,05,660.00",
-    //     gainLossPercentage:"-5.00"
-    //   }
-    // ];
     let details = [];
-    if(this.props.assets && this.props.assets.details){
+    if (this.props.assets && this.props.assets.details) {
       details = this.props.assets.details;
     }
     const columns = [
@@ -48,10 +37,12 @@ class AssetsSummary extends Component {
         sort: true
       }, {
         dataField: 'currentValuation',
-        text: 'Current Valuation'
+        text: 'Current Valuation',
+        formatter: moneyFormatter
       }, {
         dataField: 'amountInvested',
-        text: 'Amount Invested'
+        text: 'Amount Invested',
+        formatter: moneyFormatter
       },
       {
         dataField: 'gainLoss',
@@ -67,11 +58,13 @@ class AssetsSummary extends Component {
       },
       {
         dataField: 'totalNotionalGainLoss',
-        text: 'Total Notional Gain/Loss'
+        text: 'Total Notional Gain/Loss',
+        formatter: moneyFormatter
       },
       {
         dataField: 'totalRealizedGainLoss',
-        text: 'Total Realized Gain/Loss'
+        text: 'Total Realized Gain/Loss',
+        formatter: moneyFormatter
       }
     ];
 
