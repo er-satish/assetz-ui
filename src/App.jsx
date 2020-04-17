@@ -11,24 +11,41 @@ class App extends Component {
     super(props);
     this.state = {
       portfolioName: "Retirement",
+      valuationPeriod: "LAST_AVAILABLE_DAY",
       data: null
     }
     this.portfolioChange = this.handlePortfolioChange.bind(this);
+    this.handlePeriodChange = this.handlePeriodChange.bind(this);
   }
 
   handlePortfolioChange(name) {
+    debugger
     this.setState({
       portfolioName: name
     });
   }
 
-  componentDidMount() {
-    fetch('http://192.168.0.105:8080/assets')
+  handlePeriodChange(value) {
+    debugger
+    this.setState({
+      valuationPeriod: value
+    },
+    () => this.fetchServiceData());
+
+  }
+
+  fetchServiceData(){
+    debugger
+    fetch('http://localhost:8080/assets?valuationPeriod=' + this.state.valuationPeriod)
       .then(res => res.json())
       .then((data) => {
         this.setState({ data: data })
       })
       .catch(console.log)
+  }
+
+  componentDidMount() {
+    this.fetchServiceData();
   }
 
   render() {
@@ -39,7 +56,7 @@ class App extends Component {
         <div className="container-fluid">
           <div className="row">
             <MySidebar data={data} handlePortfolioChange={this.portfolioChange.bind(this)} />
-            <MainContent portfolioName={portfolioName} data={data} />
+            <MainContent portfolioName={portfolioName} data={data} handlePeriodChange={this.handlePeriodChange.bind(this)}/>
           </div>
         </div>
         <Footer />

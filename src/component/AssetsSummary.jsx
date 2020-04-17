@@ -60,12 +60,12 @@ class AssetsSummary extends Component {
       {
         dataField: 'totalNotionalGainLoss',
         text: 'Total Notional Gain/Loss',
-        formatter: moneyFormatter
+        formatter: lossGainFormatter
       },
       {
         dataField: 'totalRealizedGainLoss',
         text: 'Total Realized Gain/Loss',
-        formatter: moneyFormatter
+        formatter: lossGainFormatter
       }
     ];
 

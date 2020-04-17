@@ -6,8 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class MainContent extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
+    }
+
+    handlePeriodChange(valuationPeriod) {
+        debugger
+        this.props.handlePeriodChange(valuationPeriod);
     }
 
     render() {
@@ -39,11 +42,12 @@ class MainContent extends Component {
                             <button className="btn btn-sm btn-outline-secondary">Share</button>
                             <button className="btn btn-sm btn-outline-secondary">Export</button>
                         </div>
-                        <select className="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <option selected value="today">Today</option>
-                            <option value="this-week">This Week</option>
-                            <option value="this-month">This Month</option>
-                            <option value="this-year">This Year</option>
+                        <select onChange={(val) => this.handlePeriodChange(val.target.value)} className="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <option value="TODAY">Today</option>
+                            <option value="THIS_WEEK" >This Week</option>
+                            <option value="THIS_MONTH">This Month</option>
+                            <option value="THIS_YEAR">This Year</option>
+                            <option selected value="LAST_AVAILABLE_DAY">Last Availabe NAV Day</option>
                         </select>
                     </div>
                 </div>
