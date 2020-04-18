@@ -11,7 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       portfolioName: "Retirement",
-      valuationPeriod: "LAST_AVAILABLE_DAY",
+      valuationPeriod: "TODAY",
       data: null
     }
     this.portfolioChange = this.handlePortfolioChange.bind(this);
@@ -36,7 +36,7 @@ class App extends Component {
 
   fetchServiceData(){
     debugger
-    fetch('http://localhost:8080/assets?valuationPeriod=' + this.state.valuationPeriod)
+    fetch('http://192.168.0.112:8080/assets?valuationPeriod=' + this.state.valuationPeriod)
       .then(res => res.json())
       .then((data) => {
         this.setState({ data: data })

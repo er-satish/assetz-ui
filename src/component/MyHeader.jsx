@@ -36,32 +36,27 @@ class MyHeader extends Component {
     const formattedTotalNetworthChange = utils.formatMoney(totalNetworthChange)
 
     return (
-      <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <div>
-          <FontAwesomeIcon icon="hand-holding-usd" color="yellow" size="3x" />
-          <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">My Assetz</a>
-        </div>
+      <nav className="navbar navbar-dark sticky-top bg-dark">
         <div className="row">
           <div className="col">
-            <a className="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">
+            <FontAwesomeIcon icon="hand-holding-usd" color="yellow" size="3x" />
+            <a className="navbar-brand " href="#">My Assetz</a>
+          </div>
+          <div className="col">
+            <a className="navbar-brand  text-white" href="#">
               My Networth: <FontAwesomeIcon icon="rupee-sign" color="white" size="1x" />
               <span className="label label-default ml-1">{formattedTotalNetworth}</span>
             </a>
           </div>
           <div className="col">
-            <a className="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">
+            <a className="navbar-brand  text-white" href="#">
               Today's Change: <FontAwesomeIcon icon="rupee-sign" color="white" size="1x" />
               <span className="label label-default ml-1">{formattedTotalNetworthChange}</span>
               {icon}
             </a>
           </div>
         </div>
-        {/* <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"/> */}
-        <ul className="navbar-nav px-3">
-          <li className="nav-item text-nowrap">
-            <a className="nav-link" href="#">Sign out</a>
-          </li>
-        </ul>
+
       </nav>
     );
   }
