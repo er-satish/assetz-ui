@@ -30,12 +30,11 @@ class App extends Component {
     this.setState({
       valuationPeriod: value
     },
-    () => this.fetchServiceData());
+      () => this.fetchServiceData());
 
   }
 
-  fetchServiceData(){
-    debugger
+  fetchServiceData() {
     fetch('http://192.168.0.112:8080/assets?valuationPeriod=' + this.state.valuationPeriod)
       .then(res => res.json())
       .then((data) => {
@@ -51,12 +50,14 @@ class App extends Component {
   render() {
     const { portfolioName, data } = this.state;
     return (
-      <div className="App">
-        <MyHeader data={data} />
-        <div className="container-fluid">
+      <div className="App container-fluid">
+        <div>
           <div className="row">
-            <MySidebar data={data} handlePortfolioChange={this.portfolioChange.bind(this)} />
-            <MainContent portfolioName={portfolioName} data={data} handlePeriodChange={this.handlePeriodChange.bind(this)}/>
+            <MyHeader data={data} />
+          </div>
+          <div className="row">
+            <MySidebar portfolioName={portfolioName} data={data} handlePortfolioChange={this.portfolioChange.bind(this)} />
+            <MainContent portfolioName={portfolioName} data={data} handlePeriodChange={this.handlePeriodChange.bind(this)} />
           </div>
         </div>
         <Footer />

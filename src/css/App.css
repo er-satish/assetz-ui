@@ -66,3 +66,7 @@
   text-transform: uppercase;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
