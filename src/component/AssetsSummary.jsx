@@ -73,19 +73,9 @@ class AssetsSummary extends Component {
       <div>
         <h2 className="text-left">Assets Summary</h2>
         <BootstrapTable wrapperClasses="table-responsive" keyField='assetType' data={details} columns={columns} />
-
       </div>
     );
   }
 }
-
-// isGainOrLoss = (amount) => {
-//   let icon;
-//   if(changePercentage < 0){
-//       icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red"/>
-//   }else if(this.props.changePercentage > 0){
-//       icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green"/>
-//   }
-// }  
 
 export default AssetsSummary;

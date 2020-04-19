@@ -6,25 +6,31 @@ class MySidebar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            links : []
+            links: []
         }
     }
 
     static getDerivedStateFromProps(props, state) {
+        debugger
         const links = [];
         if (props && props.data && props.data.data && props.data.data.length > 0) {
             for (let i = 0; i < props.data.data.length; i++) {
-                links.push({ key: i, text: props.data.data[i].portfolioName, isActive: false });
+                var active = false;
+                if (props.portfolioName && props.portfolioName === props.data.data[i].portfolioName) {
+                    active = true;
+                }
+                links.push({ index: i, text: props.data.data[i].portfolioName, isActive: active });
             }
         }
         return { links: links };
     }
 
     handleClick(i) {
+        debugger
         const links = this.state.links.slice();
         let portfolioName = "";
-        for (const j in links) {
-            if (i == j) {
+        for (var j = 0; j < links.length; j++) {
+            if (i === j) {
                 links[j].isActive = true;
                 portfolioName = links[j].text;
             } else {
@@ -38,16 +44,17 @@ class MySidebar extends Component {
     }
 
     render() {
-
+        const { links } = this.state;
+        debugger
         return (
-            <nav className="col-md-2 d-none d-md-block bg-light sidebar">
+            <nav className="col-md-2 bg-light sidebar">
                 <div className="sidebar-sticky">
                     <ul className="nav flex-column">
-                        {this.state.links.map((link, i) =>
+                        {links.map((link, i) =>
                             <NavLink
                                 text={link.text}
                                 isActive={link.isActive}
-                                key={link.key}
+                                key={link.index}
                                 onClick={() => this.handleClick(i)}
                             />
                         )}
