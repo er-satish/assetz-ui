@@ -36,24 +36,24 @@ class MyHeader extends Component {
     const formattedTotalNetworthChange = utils.formatMoney(totalNetworthChange)
 
     return (
-      <nav className="navbar navbar-dark sticky-top bg-dark">
+      <nav className="navbar navbar-dark sticky-top bg-dark col-md-12">
         <div className="row">
           <div className="col">
             <FontAwesomeIcon icon="hand-holding-usd" color="yellow" size="3x" />
-            <a className="navbar-brand " href="#">My Assetz</a>
+            <span className="navbar-brand ">My Assetz</span >
           </div>
           <div className="col">
-            <a className="navbar-brand  text-white" href="#">
+            <span className="navbar-brand  text-white">
               My Networth: <FontAwesomeIcon icon="rupee-sign" color="white" size="1x" />
               <span className="label label-default ml-1">{formattedTotalNetworth}</span>
-            </a>
+            </span>
           </div>
           <div className="col">
-            <a className="navbar-brand  text-white" href="#">
+            <span className="navbar-brand  text-white">
               Today's Change: <FontAwesomeIcon icon="rupee-sign" color="white" size="1x" />
               <span className="label label-default ml-1">{formattedTotalNetworthChange}</span>
               {icon}
-            </a>
+            </span>
           </div>
         </div>
 

@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import InfoCard from './InfoCard';
 import AssetsSummary from './AssetsSummary';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class MainContent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     handlePeriodChange(valuationPeriod) {
         debugger
         this.props.handlePeriodChange(valuationPeriod);
@@ -34,7 +29,7 @@ class MainContent extends Component {
         }
 
         return (
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-auto px-auto">
+            <main role="main" className="col-md-10 ml-sm-auto col-lg-10 pt-auto px-auto">
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <h1 className="h2">{this.props.portfolioName}</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
@@ -42,8 +37,8 @@ class MainContent extends Component {
                             <button className="btn btn-sm btn-outline-secondary">Share</button>
                             <button className="btn btn-sm btn-outline-secondary">Export</button>
                         </div>
-                        <select onChange={(val) => this.handlePeriodChange(val.target.value)} className="btn btn-sm btn-outline-primary dropdown-toggle">
-                            <option selected value="TODAY">Today</option>
+                        <select defaultValue="TODAY" onChange={(val) => this.handlePeriodChange(val.target.value)} className="btn btn-sm btn-outline-primary dropdown-toggle">
+                            <option value="TODAY">Today</option>
                             <option value="_7Days" >Last 7 Days</option>
                             <option value="_15Days">Last 15 Days</option>
                             <option value="_30Days">Last 30 Days</option>

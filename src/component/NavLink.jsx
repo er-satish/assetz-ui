@@ -4,10 +4,14 @@ class NavLink extends Component {
     render() {
         let { onClick } = this.props;
         return (
-            <li key={this.props.key} onClick={onClick} className={"nav-item " + (this.props.isActive ? "active" : "")}>
-                <a className="nav-link text-left" href={this.props.key}>{this.props.text}</a>
+            <li key={this.props.index} onClick={onClick}>
+                <span className={"nav-link text-left cursor-pointer " + (this.props.isActive ? "active" : "")}>
+                    {this.props.text}
+                </span>
             </li>
         );
     }
 }
 export default NavLink;
+
+
