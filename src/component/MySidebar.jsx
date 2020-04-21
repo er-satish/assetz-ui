@@ -45,7 +45,6 @@ class MySidebar extends Component {
 
     render() {
         const { links } = this.state;
-        debugger
         return (
             <nav className="col-md-2 bg-light sidebar">
                 <div className="sidebar-sticky">
