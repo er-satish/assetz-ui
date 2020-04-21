@@ -45,7 +45,7 @@ class MySidebar extends Component {
         const { links } = this.state;
         return (
             <nav className="col-md-2 bg-light sidebar">
-                <div className="sidebar-sticky">
+                <div>
                     <ul className="nav flex-column">
                         {links.map((link, i) =>
                             <NavLink

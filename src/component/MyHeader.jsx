@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as utils from './Utils'
+import Button from 'react-bootstrap/Button'
+import AppDashboard from './AppDashboard';
 
 class MyHeader extends Component {
 
@@ -8,8 +10,10 @@ class MyHeader extends Component {
     super(props);
     this.state = {
       totalNetworth: null,
-      totalNetworthChange: null
+      totalNetworthChange: null,
+      show: false
     }
+    this.closeAppStatus = this.closeAppStatus.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -23,9 +27,21 @@ class MyHeader extends Component {
     return { totalNetworth: totalNetworth, totalNetworthChange: totalNetworthChange };
   }
 
+  closeAppStatus() {
+    this.setState({
+      show: false
+    });
+  }
+
+  showAppStatus() {
+    this.setState({
+      show: true
+    });
+  }
+
 
   render() {
-    const { totalNetworth, totalNetworthChange } = this.state;
+    const { totalNetworth, totalNetworthChange, show } = this.state;
     let icon;
     if (totalNetworthChange < 0) {
       icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" className="ml-1" />
@@ -54,6 +70,10 @@ class MyHeader extends Component {
               <span className="label label-default ml-1">{formattedTotalNetworthChange}</span>
               {icon}
             </span>
+          </div>
+          <div className="col">
+            <Button onClick={() => this.showAppStatus()} variant="outline-success">App Status!</Button>
+            <AppDashboard show={show} closeAppStatus={this.closeAppStatus.bind(this)}/>
           </div>
         </div>
 
