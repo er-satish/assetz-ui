@@ -11,7 +11,6 @@ class MySidebar extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        debugger
         const links = [];
         if (props && props.data && props.data.data && props.data.data.length > 0) {
             for (let i = 0; i < props.data.data.length; i++) {
@@ -26,7 +25,6 @@ class MySidebar extends Component {
     }
 
     handleClick(i) {
-        debugger
         const links = this.state.links.slice();
         let portfolioName = "";
         for (var j = 0; j < links.length; j++) {
@@ -45,7 +43,6 @@ class MySidebar extends Component {
 
     render() {
         const { links } = this.state;
-        debugger
         return (
             <nav className="col-md-2 bg-light sidebar">
                 <div className="sidebar-sticky">
