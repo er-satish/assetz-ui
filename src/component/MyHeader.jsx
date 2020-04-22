@@ -48,8 +48,8 @@ class MyHeader extends Component {
     } else if (totalNetworthChange > 0) {
       icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" className="ml-1" />
     }
-    const formattedTotalNetworth = utils.formatMoney(totalNetworth)
-    const formattedTotalNetworthChange = utils.formatMoney(totalNetworthChange)
+    const formattedTotalNetworth = utils.formatMoneyInShortFormat(totalNetworth)
+    const formattedTotalNetworthChange = utils.formatMoneyInShortFormat(totalNetworthChange)
 
     return (
       <nav className="navbar navbar-dark sticky-top bg-dark col-md-12">

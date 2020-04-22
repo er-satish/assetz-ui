@@ -29,3 +29,6 @@
   cursor: pointer;
 }
 
+.carousel-inner {
+  background-color: lightgray !important;
+  }

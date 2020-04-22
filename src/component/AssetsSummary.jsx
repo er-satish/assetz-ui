@@ -35,37 +35,44 @@ class AssetsSummary extends Component {
       {
         dataField: 'assetType',
         text: 'Asset Type',
-        sort: true
+        sort: true,
+        align: "left"
       }, {
         dataField: 'currentValuation',
         text: 'Current Valuation',
-        formatter: moneyFormatter
+        formatter: moneyFormatter,
+        align: "left"
       }, {
         dataField: 'amountInvested',
         text: 'Amount Invested',
-        formatter: moneyFormatter
+        formatter: moneyFormatter,
+        align: "left"
       },
       {
         dataField: 'gainLoss',
         text: 'Gain/Loss',
         sort: true,
-        formatter: lossGainFormatter
+        formatter: lossGainFormatter,
+        align: "left"
       },
       {
         dataField: 'gainLossPercentage',
         text: 'Gain/Loss %',
         sort: true,
-        formatter: lossGainFormatter
+        formatter: lossGainFormatter,
+        align: "left"
       },
       {
         dataField: 'totalNotionalGainLoss',
         text: 'Total Notional Gain/Loss',
-        formatter: lossGainFormatter
+        formatter: lossGainFormatter,
+        align: "left"
       },
       {
         dataField: 'totalRealizedGainLoss',
         text: 'Total Realized Gain/Loss',
-        formatter: lossGainFormatter
+        formatter: lossGainFormatter,
+        align: "left"
       }
     ];
 

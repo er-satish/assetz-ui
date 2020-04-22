@@ -13,13 +13,13 @@ class InfoCard extends Component {
         }
 
         const formattedAmount = utils.formatMoney(this.props.amount)
-        const formattedChangePercentage = utils.formatMoney(changePercentage)
+        const formattedChangePercentage = utils.formatNum(changePercentage)
         const formattedChange = utils.formatMoney(this.props.change)
         return (
             <div className="card bg-light">
                 <div className="card-body text-left">
                     <h5 className="card-title">{this.props.name}</h5>
-                    <h2 className="card-subtitle text-muted text-left">&#8377; {formattedAmount}</h2>
+                    <h2 className="card-subtitle text-muted text-left">{formattedAmount}</h2>
                     <div className="card-text text-left">
                         <p>
                             <b>Change Rate:</b> {formattedChangePercentage} % {icon}

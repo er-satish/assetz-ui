@@ -3,9 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 class AppDashboard extends Component {
-    constructor(props) {
-        super(props);
-    }
+    
     render() {
         const { show } = this.props;
         return (

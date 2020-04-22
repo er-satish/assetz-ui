@@ -4,6 +4,7 @@ import Footer from './component/Footer';
 import MySidebar from './component/MySidebar';
 import MainContent from './component/MainContent';
 import './component/fontLibrary';
+import * as utils from './component/Utils'
 
 class App extends Component {
 
@@ -11,8 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       portfolioName: "Retirement",
-      startDate: null,
-      endDate: null,
+      startDate: utils.yesterdayDate(),
+      endDate: utils.todayDate(),
       data: null
     }
     this.portfolioChange = this.handlePortfolioChange.bind(this);
@@ -32,15 +33,21 @@ class App extends Component {
     },
       () => this.fetchServiceData());
 
-  }
+  } 
 
   fetchServiceData() {
-    fetch('http://192.168.0.112:8080/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
-      .then(res => res.json())
-      .then((data) => {
-        this.setState({ data: data })
-      })
-      .catch(console.log)
+    const data = JSON.parse(utils.mockAssetzService());
+    console.log(data)
+    this.setState({
+      data: data
+    });
+    //uncomment below in production.
+    // fetch('http://192.168.0.112:8080/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
+    //   .then(res => res.json())
+    //   .then((data) => {
+    //     this.setState({ data: data })
+    //   })
+    //   .catch(console.log)
   }
 
   componentDidMount() {

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import InfoCard from './InfoCard';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import AssetsSummary from './AssetsSummary';
+import * as utils from './Utils';
+import GoalsContainer from './GoalsContainer';
 
 class MainContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fromDate: null,
-            toDate: null
+            fromDate: utils.yesterdayDate(),
+            toDate: utils.todayDate()
         }
     }
 
@@ -50,12 +54,12 @@ class MainContent extends Component {
                     <h1 className="h2">{this.props.portfolioName}</h1>
                     <div className="form-group mb-md-0">
                         <label >From Date:</label>
-                        <input type="date" name="fromDate" max="2099-12-31"
+                        <input type="date" name="fromDate" max="2099-12-31" value={this.state.fromDate}
                             min="2020-01-01" onChange={(val) => this.handlePeriodChange(val.target.value, null)} />
                     </div>
                     <div className="form-group mb-md-0">
                         <label>To Date:
-                            <input className="border border-grey" type="date" name="toDate" min="2020-01-01"
+                            <input className="border border-grey" type="date" name="toDate" min="2020-01-01" value={this.state.toDate}
                                 max="2099-12-31" onChange={(val) => this.handlePeriodChange(null, val.target.value)} />
                         </label>
                     </div>
@@ -66,12 +70,17 @@ class MainContent extends Component {
                         </div>
                     </div>
                 </div>
-
-                <div className="card-columns">
-                    {cards}
-                </div>
-
-                <AssetsSummary assets={assets} />
+                <Tabs defaultActiveKey="valuation" id="uncontrolled-tab-example">
+                    <Tab eventKey="valuation" title="Valuation">
+                        <div className="card-columns">
+                            {cards}
+                        </div>
+                        <AssetsSummary assets={assets} />
+                    </Tab>
+                    <Tab eventKey="goal" title="Goal">
+                        <GoalsContainer />
+                    </Tab>
+                </Tabs>
             </main>
         );
     }
