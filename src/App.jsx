@@ -36,18 +36,18 @@ class App extends Component {
   } 
 
   fetchServiceData() {
-    const data = JSON.parse(utils.mockAssetzService());
-    console.log(data)
-    this.setState({
-      data: data
-    });
+    // const data = JSON.parse(utils.mockAssetzService());
+    // console.log(data)
+    // this.setState({
+    //   data: data
+    // });
     //uncomment below in production.
-    // fetch('http://192.168.0.112:8080/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
-    //   .then(res => res.json())
-    //   .then((data) => {
-    //     this.setState({ data: data })
-    //   })
-    //   .catch(console.log)
+    fetch('http://192.168.0.112:8080/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({ data: data })
+      })
+      .catch(console.log)
   }
 
   componentDidMount() {

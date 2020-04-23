@@ -5,16 +5,20 @@ import Tab from 'react-bootstrap/Tab';
 import AssetsSummary from './AssetsSummary';
 import * as utils from './Utils';
 import GoalsContainer from './GoalsContainer';
+import AssetsDetails from './AssetsDetails';
 
 class MainContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             fromDate: utils.yesterdayDate(),
-            toDate: utils.todayDate()
+            toDate: utils.todayDate(),
+            assetType: null,
+            activeTab: "valuation",
+            reloadAssetDetails: false
         }
+        this.selectAssetType = this.selectAssetType.bind(this);
     }
-
 
     handlePeriodChange(fromDate, toDate) {
         const startDate = fromDate != null ? fromDate : this.state.fromDate;
@@ -27,6 +31,28 @@ class MainContent extends Component {
             this.props.handlePeriodChange(startDate, endDate);
         }
     }
+
+    handleTabChange(eventKey){
+        console.log("tab is changed")
+        this.setState({
+            activeTab: eventKey
+        });
+    }
+
+    selectAssetType(assetType) {
+        console.log("selectAssetType is called")
+        this.setState({
+            assetType: assetType,
+            reloadAssetDetails: true
+        }, () => this.handleTabChange("details"));
+      }
+
+    // componentDidMount(){
+    //     console.log("inside componentDidMount for mainContent");
+    //     this.setState({
+    //         reloadAssetDetails: true
+    //     });
+    // }  
 
     render() {
         const { data } = this.props;
@@ -70,12 +96,15 @@ class MainContent extends Component {
                         </div>
                     </div>
                 </div>
-                <Tabs defaultActiveKey="valuation" id="uncontrolled-tab-example">
+                <Tabs activeKey={this.state.activeTab} id="main-tabs" onSelect={(k) => this.handleTabChange(k)} unmountOnExit="true">
                     <Tab eventKey="valuation" title="Valuation">
                         <div className="card-columns">
                             {cards}
                         </div>
-                        <AssetsSummary assets={assets} />
+                        <AssetsSummary assets={assets} selectAssetType={this.selectAssetType.bind(this)}/>
+                    </Tab>
+                    <Tab eventKey="details" title="Details">
+                        <AssetsDetails portfolioName={this.props.portfolioName} assetType={this.state.assetType} reloadAssetDetails={this.state.reloadAssetDetails}/>
                     </Tab>
                     <Tab eventKey="goal" title="Goal">
                         <GoalsContainer />

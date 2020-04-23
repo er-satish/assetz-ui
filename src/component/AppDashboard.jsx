@@ -1,11 +1,47 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import * as utils from './Utils'
 
 class AppDashboard extends Component {
-    
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: null
+        }
+    }
+
+    fetchServiceData() {
+        const data = JSON.parse(utils.mockAppStatusService());
+        console.log(data)
+        this.setState({
+            data: data
+        });
+        //uncomment below in production.
+        // fetch('http://192.168.0.112:8080/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
+        //   .then(res => res.json())
+        //   .then((data) => {
+        //     this.setState({ data: data })
+        //   })
+        //   .catch(console.log)
+    }
+
+    componentDidMount() {
+        this.fetchServiceData();
+    }
+
     render() {
         const { show } = this.props;
+        let stocksNavSyncDt = null;
+        let mfNavSyncDt = null;
+        const { data } = this.state;
+        if (data && data.data) {
+            stocksNavSyncDt = data.data.stocksNavSyncDt;
+            mfNavSyncDt = data.data.mfNavSyncDt;
+        }
+
+        debugger
         return (
             <div>
                 {/* <Alert show={show} variant="success">
@@ -28,14 +64,14 @@ class AppDashboard extends Component {
                         <Modal.Title>Application Status</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <label>Stocks Latest Nav Date: </label>
-                    <span>
-                        100.5
-                    </span>
-                    <label>Mutual Fund Latest Nav Date: </label>
-                    <span>
-                        100.5
-                    </span>
+                        <p>
+                            <label class="text-primary">Stocks Nav Date:</label>
+                            <label class="text-success"> {stocksNavSyncDt}</label>
+                        </p>
+                        <p>
+                            <label class="text-primary">Mutual Funds Nav Date:</label>
+                            <label class="text-success"> {mfNavSyncDt} </label>
+                        </p>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => this.props.closeAppStatus()}>

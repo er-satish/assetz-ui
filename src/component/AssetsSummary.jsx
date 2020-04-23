@@ -24,7 +24,25 @@ function moneyFormatter(cell, row) {
   );
 }
 
+function percentFormatter(cell, row) {
+  let icon;
+  const formattedPer = utils.formatNum(cell)
+  if (cell < 0) {
+      icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
+  } else if (cell > 0) {
+      icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
+  }
+  return (
+      <span>{formattedPer} % {icon}</span>
+  );
+}
+
 class AssetsSummary extends Component {
+
+  handleRowSelect(assetType) {
+    console.log("clicked on:"+assetType)
+    this.props.selectAssetType(assetType);
+  };
 
   render() {
     let details = [];
@@ -41,11 +59,13 @@ class AssetsSummary extends Component {
         dataField: 'currentValuation',
         text: 'Current Valuation',
         formatter: moneyFormatter,
+        sort: true,
         align: "left"
       }, {
         dataField: 'amountInvested',
         text: 'Amount Invested',
         formatter: moneyFormatter,
+        sort: true,
         align: "left"
       },
       {
@@ -59,27 +79,35 @@ class AssetsSummary extends Component {
         dataField: 'gainLossPercentage',
         text: 'Gain/Loss %',
         sort: true,
-        formatter: lossGainFormatter,
+        formatter: percentFormatter,
         align: "left"
       },
       {
         dataField: 'totalNotionalGainLoss',
         text: 'Total Notional Gain/Loss',
         formatter: lossGainFormatter,
+        sort: true,
         align: "left"
       },
       {
         dataField: 'totalRealizedGainLoss',
         text: 'Total Realized Gain/Loss',
         formatter: lossGainFormatter,
+        sort: true,
         align: "left"
       }
     ];
 
+    const rowEvents = {
+      onClick: (e, row, rowIndex) => {
+        this.handleRowSelect(row.assetType);
+      }
+    };
+
     return (
       <div>
         <h2 className="text-left">Assets Summary</h2>
-        <BootstrapTable wrapperClasses="table-responsive" keyField='assetType' data={details} columns={columns} />
+        <BootstrapTable keyField="assetType" wrapperClasses="table-responsive text-nowrap" keyField='assetType' data={details} columns={columns} rowEvents={ rowEvents } />
       </div>
     );
   }
