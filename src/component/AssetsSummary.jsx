@@ -107,7 +107,7 @@ class AssetsSummary extends Component {
     return (
       <div>
         <h2 className="text-left">Assets Summary</h2>
-        <BootstrapTable keyField="assetType" wrapperClasses="table-responsive text-nowrap" keyField='assetType' data={details} columns={columns} rowEvents={ rowEvents } />
+        <BootstrapTable keyField="assetType" wrapperClasses="table-responsive text-nowrap" data={details} columns={columns} rowEvents={ rowEvents } />
       </div>
     );
   }

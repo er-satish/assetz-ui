@@ -37,16 +37,13 @@ function percentFormatter(cell, row) {
     );
 }
 
-
-
 class AssetsDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: null,
-            startDate: utils.yesterdayDate(),
-            endDate: utils.todayDate()
-        }
+            activePortfolioName: null
+        };
     }
 
     fetchServiceData() {
@@ -57,24 +54,21 @@ class AssetsDetails extends Component {
         // });
         //uncomment below in production.
         console.log("fetch service in assets details called");
-        const { assetType, portfolioName } = this.props;
+        const { assetType, portfolioName, startDate, endDate } = this.props;
+        debugger
         if (assetType && assetType != null && portfolioName && portfolioName != null) {
-            fetch('http://192.168.0.112:8080/assets/types/' + assetType + '/portfolios/' + portfolioName + '?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
+            fetch('http://192.168.0.112:8080/assets/types/' + assetType + '/portfolios/' + portfolioName + '?startDate=' + startDate + "&endDate=" + endDate)
                 .then(res => res.json())
                 .then((data) => {
                     this.setState({ data: data })
                 })
                 .catch(console.log)
         }
-
     }
 
     componentDidMount() {
         console.log("inside componentDidMount for assets details");
-        debugger
-        if (this.props.reloadAssetDetails && this.props.reloadAssetDetails === true) {
-            this.fetchServiceData();
-        }
+        this.fetchServiceData();
     }
 
     render() {
@@ -147,7 +141,6 @@ class AssetsDetails extends Component {
                 text: 'Gain/Loss',
                 sort: true,
                 formatter: lossGainFormatter,
-                sort: true,
                 align: "left"
             },
             {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavLink from './NavLink';
+import AppContext from './AppContext';
 
 class MySidebar extends Component {
 
@@ -38,26 +39,31 @@ class MySidebar extends Component {
         this.setState({
             links: links,
         });
-        this.props.handlePortfolioChange(portfolioName);
+        //this.props.handlePortfolioChange(portfolioName);
+        return portfolioName;
     }
 
     render() {
         const { links } = this.state;
         return (
-            <nav className="col-md-2 bg-light sidebar">
-                <div>
-                    <ul className="nav flex-column">
-                        {links.map((link, i) =>
-                            <NavLink
-                                text={link.text}
-                                isActive={link.isActive}
-                                key={link.index}
-                                onClick={() => this.handleClick(i)}
-                            />
-                        )}
-                    </ul>
-                </div>
-            </nav>
+            <AppContext.Consumer>
+                {context => (
+                    <nav className="col-md-2 bg-light sidebar">
+                        <div>
+                            <ul className="nav flex-column">
+                                {links.map((link, i) =>
+                                    <NavLink
+                                        text={link.text}
+                                        isActive={link.isActive}
+                                        key={link.index}
+                                        onClick={() => context.setPortfolioName(this.handleClick(i))}
+                                    />
+                                )}
+                            </ul>
+                        </div>
+                    </nav>
+                )}
+            </AppContext.Consumer>
         );
     }
 }
