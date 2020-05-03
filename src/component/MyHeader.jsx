@@ -99,7 +99,7 @@ class MyHeader extends Component {
               </div>
 
               <div className="col">
-                <Button onClick={() => this.showAppStatus()} variant="outline-success">App Status!</Button>
+                <Button onClick={() => this.showAppStatus()} variant="outline-success">My Bills</Button>
                 <AppDashboard show={show} closeAppStatus={this.closeAppStatus.bind(this)} />
               </div>
             </div>

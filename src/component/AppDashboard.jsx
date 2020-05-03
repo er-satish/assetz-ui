@@ -1,46 +1,104 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import * as utils from './Utils'
+import BootstrapTable from 'react-bootstrap-table-next';
+import * as utils from './Utils';
+import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 
 class AppDashboard extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: null
+            data: []
         }
     }
 
     fetchServiceData() {
-        const data = JSON.parse(utils.mockAppStatusService());
-        console.log(data)
-        this.setState({
-            data: data
-        });
+        fetch('http://192.168.0.112:8080/bills')
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({ data: data })
+            })
+            .catch(console.log)
+        // const data = JSON.parse(utils.mockAppStatusService());
+        // console.log(data)
+        // this.setState({
+        //     data: data
+        // });
         //uncomment below in production.
-        // fetch('http://192.168.0.112:8080/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
-        //   .then(res => res.json())
-        //   .then((data) => {
-        //     this.setState({ data: data })
-        //   })
-        //   .catch(console.log)
     }
 
     componentDidMount() {
         this.fetchServiceData();
     }
 
-    render() {
-        const { show } = this.props;
-        let stocksNavSyncDt = null;
-        let mfNavSyncDt = null;
-        const { data } = this.state;
-        if (data && data.data) {
-            stocksNavSyncDt = data.data.stocksNavSyncDt;
-            mfNavSyncDt = data.data.mfNavSyncDt;
-        }
+    saveData() {
+        console.log("save is called..");
+        console.log(this.state.data);
+        fetch('http://192.168.0.112:8080/bills', {
+            method: 'PUT',
+            body: JSON.stringify(this.state.data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({ data: data })
+            }).catch(err => err);
+    }
 
+    render() {
+        let { data } = this.state;
+        const columns = [
+            {
+                dataField: 'id',
+                hidden: true
+            },
+            {
+                dataField: 'bank',
+                text: 'Bank Name',
+                sort: true,
+                align: "left"
+            },
+            {
+                dataField: 'billDt',
+                text: 'Statement Date',
+                sort: true,
+                align: "left"
+            }, {
+                dataField: 'dueDt',
+                text: 'Due Date',
+                sort: true,
+                align: "left",
+                editor: {
+                    type: Type.DATE
+                }
+            }, {
+                dataField: 'dueAmt',
+                text: 'Due Amount',
+                sort: true,
+                align: "left"
+            },
+            {
+                dataField: 'paidAmt',
+                text: 'Paid Amount',
+                sort: true,
+                align: "left"
+            },
+            {
+                dataField: 'paidDt',
+                text: 'Paid Date',
+                sort: true,
+                align: "left",
+                editor: {
+                    type: Type.DATE
+                }
+            }
+        ];
+
+        const { show } = this.props;
         debugger
         return (
             <div>
@@ -59,21 +117,27 @@ class AppDashboard extends Component {
                     </div>
                 </Alert> */}
 
-                <Modal show={show} onHide={() => this.props.closeAppStatus()} animation={false}>
+                <Modal size="lg" show={show} onHide={() => this.props.closeAppStatus()} animation={false}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Application Status</Modal.Title>
+                        <Modal.Title>Credit Card Bill Status</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>
+                        {/* <p>
                             <label class="text-primary">Stocks Nav Date:</label>
                             <label class="text-success"> {stocksNavSyncDt}</label>
                         </p>
                         <p>
                             <label class="text-primary">Mutual Funds Nav Date:</label>
                             <label class="text-success"> {mfNavSyncDt} </label>
-                        </p>
+                        </p> */}
+
+                        <BootstrapTable keyField="id" wrapperClasses="table-responsive text-nowrap" data={data} columns={columns}
+                            cellEdit={cellEditFactory({ mode: 'dbclick', blurToSave: true })} />
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button variant="primary" onClick={() => this.saveData()}>
+                            Save
+                        </Button>
                         <Button variant="secondary" onClick={() => this.props.closeAppStatus()}>
                             Close
                         </Button>
