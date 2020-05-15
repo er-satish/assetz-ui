@@ -1,4 +1,7 @@
-import * as moment from 'moment'
+import * as moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from 'react';
+
 
 export function formatMoney(money) {
     return new Intl.NumberFormat('en-IN',{ style: 'currency', currency: 'INR' }).format(money);
@@ -26,4 +29,42 @@ export function mockAssetzService(){
 
 export function mockAppStatusService(){
     return '{"data":{"mfNavSyncDt":"2020-04-20","stocksNavSyncDt":"2020-04-21"}}';
+}
+
+export function mockAnalysisService(){
+    return '{ "cardsData": [ { "name":"Today", "fromDate":"2020-05-12", "toDate":"2020-05-12", "details":[ { "schemeName": "ABC", "lastNav": 100.00 }, { "schemeName": "XYZ", "lastNav": 100.00 } ] }, { "name":"This Week", "fromDate":"2020-05-05", "toDate":"2020-05-12", "details":[ { "schemeName": "ABC", "lastNav": 100.00 }, { "schemeName": "XYZ", "lastNav": 100.00 } ] } ] }';
+}
+
+export function lossGainFormatter(cell, row) {
+    let icon;
+    const formattedAmount = formatMoney(cell)
+    if (cell < 0) {
+        icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
+    } else if (cell > 0) {
+        icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
+    }
+    return (
+        <span>{formattedAmount} {icon}</span>
+
+    );
+}
+
+export function moneyFormatter(cell, row) {
+    const formattedAmount = formatMoney(cell)
+    return (
+        <span>{formattedAmount} </span>
+    );
+}
+
+export function percentFormatter(cell, row) {
+    let icon;
+    const formattedPer = formatNum(cell)
+    if (cell < 0) {
+        icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
+    } else if (cell > 0) {
+        icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
+    }
+    return (
+        <span>{formattedPer} % {icon}</span>
+    );
 }

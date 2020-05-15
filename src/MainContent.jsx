@@ -32,7 +32,14 @@ class MainContent extends Component {
         this.setState({
             assetType: assetType
         }, () => this.handleTabChange("details"));
-    } 
+    }
+
+    // componentDidMount(){
+    //     console.log("inside componentDidMount for mainContent");
+    //     this.setState({
+    //         reloadAssetDetails: true
+    //     });
+    // }  
 
     render() {
         const { data } = this.props;

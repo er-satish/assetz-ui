@@ -63,10 +63,6 @@ class MyHeader extends Component {
           <nav className="navbar navbar-dark sticky-top bg-dark col-md-12">
             <div className="row">
               <div className="col">
-                <FontAwesomeIcon icon="hand-holding-usd" color="yellow" size="3x" />
-                <span className="navbar-brand ">My Assetz</span >
-              </div>
-              <div className="col">
                 <span className="navbar-brand  text-white">
                   My Networth: <FontAwesomeIcon icon="rupee-sign" color="white" size="1x" />
                   <span className="label label-default ml-1">{formattedTotalNetworth}</span>
@@ -97,7 +93,6 @@ class MyHeader extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
-
               <div className="col">
                 <Button onClick={() => this.showAppStatus()} variant="outline-success">My Bills</Button>
                 <AppDashboard show={show} closeAppStatus={this.closeAppStatus.bind(this)} />

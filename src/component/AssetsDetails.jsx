@@ -3,40 +3,6 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as utils from './Utils'
 
-function lossGainFormatter(cell, row) {
-    let icon;
-    const formattedAmount = utils.formatMoney(cell)
-    if (cell < 0) {
-        icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
-    } else if (cell > 0) {
-        icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
-    }
-    return (
-        <span>{formattedAmount} {icon}</span>
-
-    );
-}
-
-function moneyFormatter(cell, row) {
-    const formattedAmount = utils.formatMoney(cell)
-    return (
-        <span>{formattedAmount} </span>
-    );
-}
-
-function percentFormatter(cell, row) {
-    let icon;
-    const formattedPer = utils.formatNum(cell)
-    if (cell < 0) {
-        icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
-    } else if (cell > 0) {
-        icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
-    }
-    return (
-        <span>{formattedPer} % {icon}</span>
-    );
-}
-
 class AssetsDetails extends Component {
     constructor(props) {
         super(props);
@@ -86,7 +52,7 @@ class AssetsDetails extends Component {
             }, {
                 dataField: 'lastNav',
                 text: 'Last Nav',
-                formatter: moneyFormatter,
+                formatter: utils.moneyFormatter,
                 sort: true,
                 align: "left"
             }, {
@@ -98,13 +64,13 @@ class AssetsDetails extends Component {
             {
                 dataField: 'navChange',
                 text: 'Nav Change',
-                formatter: lossGainFormatter,
+                formatter: utils.lossGainFormatter,
                 sort: true,
                 align: "left"
             }, {
                 dataField: 'navChangePercent',
                 text: 'Nav Change %',
-                formatter: percentFormatter,
+                formatter: utils.percentFormatter,
                 sort: true,
                 align: "left"
             },
@@ -118,20 +84,20 @@ class AssetsDetails extends Component {
                 dataField: 'avgCost',
                 text: 'Avg Cost',
                 sort: true,
-                formatter: moneyFormatter,
+                formatter: utils.moneyFormatter,
                 align: "left"
             },
             {
                 dataField: 'investedAmt',
                 text: 'Amount Invested',
-                formatter: moneyFormatter,
+                formatter: utils.moneyFormatter,
                 sort: true,
                 align: "left"
             },
             {
                 dataField: 'currentValuation',
                 text: 'Current Valuation',
-                formatter: moneyFormatter,
+                formatter: utils.moneyFormatter,
                 sort: true,
                 align: "left"
             },
@@ -140,27 +106,27 @@ class AssetsDetails extends Component {
                 dataField: 'gainLoss',
                 text: 'Gain/Loss',
                 sort: true,
-                formatter: lossGainFormatter,
+                formatter: utils.lossGainFormatter,
                 align: "left"
             },
             {
                 dataField: 'gainLossPercent',
                 text: 'Gain/Loss %',
                 sort: true,
-                formatter: percentFormatter,
+                formatter: utils.percentFormatter,
                 align: "left"
             },
             {
                 dataField: 'notionalGainLoss',
                 text: 'Notional Gain/Loss',
-                formatter: lossGainFormatter,
+                formatter: utils.lossGainFormatter,
                 sort: true,
                 align: "left"
             },
             {
                 dataField: 'notionalGainLossPercent',
                 text: 'Notional Gain/Loss %',
-                formatter: percentFormatter,
+                formatter: utils.percentFormatter,
                 sort: true,
                 align: "left"
             }
