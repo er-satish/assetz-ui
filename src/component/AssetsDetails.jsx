@@ -23,7 +23,7 @@ class AssetsDetails extends Component {
         const { assetType, portfolioName, startDate, endDate } = this.props;
         debugger
         if (assetType && assetType != null && portfolioName && portfolioName != null) {
-            fetch('http://192.168.0.112:8080/assets/types/' + assetType + '/portfolios/' + portfolioName + '?startDate=' + startDate + "&endDate=" + endDate)
+            fetch(utils.getHostName() + utils.getPort() + '/assets/types/' + assetType + '/portfolios/' + portfolioName + '?startDate=' + startDate + "&endDate=" + endDate)
                 .then(res => res.json())
                 .then((data) => {
                     this.setState({ data: data })

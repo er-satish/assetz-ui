@@ -16,7 +16,7 @@ class AnalysisContainer extends Component {
 
     fetchServiceData() {
         //uncomment below in production.
-        fetch('http://192.168.0.112:8080/analysis')
+        fetch(utils.getHostName() + utils.getPort() + '/analysis')
             .then(res => res.json())
             .then((data) => {
                 this.setState({ cardsData: data.cardsData })

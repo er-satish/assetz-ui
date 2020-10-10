@@ -15,7 +15,7 @@ class AppDashboard extends Component {
     }
 
     fetchServiceData() {
-        fetch('http://192.168.0.112:8080/bills')
+        fetch(utils.getHostName() + utils.getPort() +'/bills')
             .then(res => res.json())
             .then((data) => {
                 this.setState({ data: data })
@@ -36,7 +36,7 @@ class AppDashboard extends Component {
     saveData() {
         console.log("save is called..");
         console.log(this.state.data);
-        fetch('http://192.168.0.112:8080/bills', {
+        fetch(utils.getHostName() + utils.getPort() + '/bills', {
             method: 'PUT',
             body: JSON.stringify(this.state.data),
             headers: {

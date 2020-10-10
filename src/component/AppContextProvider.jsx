@@ -24,7 +24,7 @@ class AppContextProvider extends Component {
         //uncomment below in production.
         debugger
         console.log("fetch assetz summary data service called");
-        fetch('http://192.168.0.112:8080/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
+        fetch(utils.getHostName() + utils.getPort() + '/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
             .then(res => res.json())
             .then((data) => {
                 this.setState({ assetzSummaryData: data })

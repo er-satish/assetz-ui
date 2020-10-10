@@ -68,3 +68,12 @@ export function percentFormatter(cell, row) {
         <span>{formattedPer} % {icon}</span>
     );
 }
+
+
+export function getHostName() {
+    return "http://192.168.0.112:";
+}
+
+export function getPort() {
+    return "30707";
+}
