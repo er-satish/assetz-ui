@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as utils from './Utils'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as utils from './Utils';
+import { authHeader } from './helpers/AuthHeader';
 
 class AssetsDetails extends Component {
     constructor(props) {
@@ -23,7 +24,11 @@ class AssetsDetails extends Component {
         const { assetType, portfolioName, startDate, endDate } = this.props;
         debugger
         if (assetType && assetType != null && portfolioName && portfolioName != null) {
-            fetch(utils.getHostName() + utils.getPort() + '/assets/types/' + assetType + '/portfolios/' + portfolioName + '?startDate=' + startDate + "&endDate=" + endDate)
+            fetch(utils.getHostName() + utils.getPort() + '/assets/types/' + assetType + '/portfolios/' + portfolioName + '?startDate=' + startDate + "&endDate=" + endDate,
+            {
+                method: 'GET',
+                headers: authHeader()
+            })
                 .then(res => res.json())
                 .then((data) => {
                     this.setState({ data: data })

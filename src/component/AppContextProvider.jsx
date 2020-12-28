@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AppContext from './AppContext';
-import * as utils from './Utils'
+import * as utils from './Utils';
+import { authHeader } from './helpers/AuthHeader';
 
 class AppContextProvider extends Component {
     state = {
@@ -24,7 +25,10 @@ class AppContextProvider extends Component {
         //uncomment below in production.
         debugger
         console.log("fetch assetz summary data service called");
-        fetch(utils.getHostName() + utils.getPort() + '/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate)
+        fetch(utils.getHostName() + utils.getPort() + '/assets?startDate=' + this.state.startDate + "&endDate=" + this.state.endDate,{
+            method: 'GET',
+            headers: authHeader()
+        })
             .then(res => res.json())
             .then((data) => {
                 this.setState({ assetzSummaryData: data })

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
 import Home from './component/Home';
 import AnalysisContainer from './component/AnalysisContainer';
+import Login from './component/Login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PrivateRoute } from './component/PrivateRoute';
 
 class App extends Component {
 
@@ -24,6 +26,7 @@ class App extends Component {
           </div>
           <NavLink className="nav-link ml-auto" to="/">Home</NavLink>
           <NavLink className="nav-link" to="/analysis">Analysis</NavLink>
+          <NavLink className="nav-link" to="/login">Logout</NavLink>
         </div>
       );
     }
@@ -32,8 +35,10 @@ class App extends Component {
         <div>
           <Navigation />
           <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/analysis" component={AnalysisContainer} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute path="/" component={Home} exact/>
+            <PrivateRoute path="/analysis" component={AnalysisContainer} />
+            
           </Switch>
         </div>
       </BrowserRouter>

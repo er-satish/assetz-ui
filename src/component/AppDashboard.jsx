@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import BootstrapTable from 'react-bootstrap-table-next';
 import * as utils from './Utils';
 import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
+import { authHeader } from './helpers/AuthHeader';
+
 
 class AppDashboard extends Component {
 
@@ -15,7 +17,10 @@ class AppDashboard extends Component {
     }
 
     fetchServiceData() {
-        fetch(utils.getHostName() + utils.getPort() +'/bills')
+        fetch(utils.getHostName() + utils.getPort() +'/bills',{
+            method: 'GET',
+            headers: authHeader()
+        })
             .then(res => res.json())
             .then((data) => {
                 this.setState({ data: data })
@@ -36,11 +41,13 @@ class AppDashboard extends Component {
     saveData() {
         console.log("save is called..");
         console.log(this.state.data);
+        let user = JSON.parse(localStorage.getItem('user'));
         fetch(utils.getHostName() + utils.getPort() + '/bills', {
             method: 'PUT',
             body: JSON.stringify(this.state.data),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + user.authdata
             }
         })
             .then(res => res.json())

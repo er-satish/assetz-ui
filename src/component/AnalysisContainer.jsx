@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as utils from './Utils';
 import Footer from './Footer';
 import GridCard from './GridCard';
+import { authHeader } from './helpers/AuthHeader';
 
 class AnalysisContainer extends Component {
 
@@ -16,7 +17,10 @@ class AnalysisContainer extends Component {
 
     fetchServiceData() {
         //uncomment below in production.
-        fetch(utils.getHostName() + utils.getPort() + '/analysis')
+        fetch(utils.getHostName() + utils.getPort() + '/analysis',{
+            method: 'GET',
+            headers: authHeader()
+        })
             .then(res => res.json())
             .then((data) => {
                 this.setState({ cardsData: data.cardsData })

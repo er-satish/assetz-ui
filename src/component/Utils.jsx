@@ -71,9 +71,9 @@ export function percentFormatter(cell, row) {
 
 
 export function getHostName() {
-    return "http://192.168.0.112:";
+    return "http://localhost:";
 }
 
 export function getPort() {
-    return "30707";
+    return "8080";
 }

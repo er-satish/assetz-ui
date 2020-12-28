@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as utils from './Utils'
 
 class InfoCard extends Component {
     render() {
         const changePercentage = this.props.changePercentage;
-        let icon;
+        // let icon;
         if (changePercentage < 0) {
-            icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
+            // icon = <FontAwesomeIcon icon="arrow-alt-circle-down" color="red" />
         } else if (this.props.changePercentage > 0) {
-            icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
+            // icon = <FontAwesomeIcon icon="arrow-alt-circle-up" color="green" />
         }
 
         const formattedAmount = utils.formatMoney(this.props.amount)
